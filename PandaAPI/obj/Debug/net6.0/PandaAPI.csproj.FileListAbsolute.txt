@@ -182,3 +182,4 @@ C:\Users\hbaongoc\Documents\Practice2\Panda-API\PandaAPI\bin\Debug\net6.0\runtim
 C:\Users\hbaongoc\Documents\Practice2\Panda-API\PandaAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\hbaongoc\Documents\Practice2\Panda-API\PandaAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\hbaongoc\Documents\Practice2\Panda-API\PandaAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\hbaongoc\Documents\Practice2\Panda-API\PandaAPI\bin\Debug\net6.0\Newtonsoft.Json.dll

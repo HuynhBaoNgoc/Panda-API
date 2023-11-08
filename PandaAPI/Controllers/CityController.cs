@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PandaApplication.Services.Interfaces;
+using PandaDomain.Entities;
 using PandaDomain.Models.Response;
 
 namespace PandaAPI.Controllers
@@ -20,6 +22,13 @@ namespace PandaAPI.Controllers
         {
             var result = await _citySerVice.GetListCity();
 
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<List<City>>> GetCityById(int id)
+        {
+            var result = await _citySerVice.GetCityById(id);
             return Ok(result);
         }
     }

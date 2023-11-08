@@ -10,5 +10,6 @@ namespace PandaApplication.Services.Interfaces
     public interface ICityService
     {
         Task<List<CityResponse>> GetListCity();
+        Task<CityResponse> GetCityById(int id);
     }
 }

@@ -35,7 +35,7 @@ namespace PandaInfrastructure
 
         private static void AddServices(IServiceCollection services)
         {
-            services.AddScoped<ICityService, CityService>();
+            services.AddTransient<ICityService, CityService>();
         }
     }
 }

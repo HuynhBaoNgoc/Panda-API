@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MZQ3IJu3VsZMximB/I95yHOEl/M1XRfLsm0yJ96AxaBm8bps9HJ8peHLgOVH49Kjv/rtEIhLh7IYEqpLuk4gfw==",
+  "dgSpecHash": "mGf0u4BrJpFdENI+m0k0YY0nyHdRkDVEZzWP3aNjKJ9ZbuQ10k5Xc6NWq/2PN0yaKqiJA5zSVHkGoheGEnJORw==",
   "success": true,
   "projectFilePath": "C:\\Users\\hbaongoc\\Documents\\Practice2\\Panda-API\\PandaInfrastructure\\PandaInfrastructure.csproj",
   "expectedPackageFiles": [
@@ -38,6 +38,7 @@
     "C:\\Users\\hbaongoc\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\hbaongoc\\.nuget\\packages\\mysql.data\\8.0.32\\mysql.data.8.0.32.nupkg.sha512",
     "C:\\Users\\hbaongoc\\.nuget\\packages\\mysql.entityframeworkcore\\7.0.0\\mysql.entityframeworkcore.7.0.0.nupkg.sha512",
+    "C:\\Users\\hbaongoc\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\hbaongoc\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
     "C:\\Users\\hbaongoc\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\hbaongoc\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",

@@ -8,7 +8,7 @@ namespace PandaDomain.Models.Options
 {
     public class DatabaseOptions
     {
-        public static string JsonKey => nameof(DatabaseOptions);
+        //public static string JsonKey => nameof(DatabaseOptions);
 
         public string Server { get; set; }
 

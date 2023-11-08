@@ -18,7 +18,24 @@ namespace PandaApplication.Services
         }
         public async Task<List<CityResponse>> GetListCity()
         {
-            return await _cityRepository.GetListCity();
+            try
+            {
+                return await _cityRepository.GetListCity();
+            } catch
+            {
+                throw new NotImplementedException();
+            }
+        }
+        public async Task<CityResponse> GetCityById(int id)
+        {
+            try
+            {
+                return await _cityRepository.GetCityById(id);
+            }
+            catch
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }
