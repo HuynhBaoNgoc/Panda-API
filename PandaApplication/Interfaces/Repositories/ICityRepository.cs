@@ -12,7 +12,7 @@ namespace PandaApplication.Interfaces.Repositories
     {
         Task<List<CityResponse>> GetListCity();
         Task<CityResponse> GetCityById(int id);
-        Task<List<CityResponse>> AddCity(CityResponse city);
+        Task<List<CityResponse>> AddCity(AddCityRequest cityRequest);
         Task<List<CityResponse>> UpdateCity(UpdateCityRequest cityRequest);
         Task<List<CityResponse>> Delete(int id);
     }

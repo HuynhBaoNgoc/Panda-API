@@ -54,7 +54,6 @@ namespace PandaInfrastructure.Repositories
             {
                 throw new NotImplementedException();
             }
-            
         }
 
         public async Task<CityResponse> GetCityById(int id)
@@ -67,19 +66,13 @@ namespace PandaInfrastructure.Repositories
                 var result = _mapper.Map<CityResponse>(city);
                 return result;
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw new NotImplementedException();
             }
-            throw new NotImplementedException();
         }
 
-        public Task<List<CityResponse>> AddCity(CityResponse city)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<List<CityResponse>> UpdateCity(UpdateCityRequest cityRequest)
+        public async Task<List<CityResponse>> AddCity(AddCityRequest cityRequest)
         {
             try
             {
@@ -90,11 +83,30 @@ namespace PandaInfrastructure.Repositories
                 var result = _mapper.Map<List<CityResponse>>(cities);
                 return result;
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw new NotImplementedException();
             }
-            throw new NotImplementedException();
+        }
+
+        public async Task<List<CityResponse>> UpdateCity(UpdateCityRequest cityRequest)
+        {
+            try
+            {
+                var city = await _pandaDbContext.Cities.FindAsync(cityRequest.CityId);
+                if (city == null)
+                    throw new NotImplementedException();
+                var newInfo = _mapper.Map<City>(cityRequest);
+                city = newInfo;
+                await _pandaDbContext.SaveChangesAsync();
+                var cities = await _pandaDbContext.Cities.ToListAsync();
+                var result = _mapper.Map<List<CityResponse>>(cities);
+                return result;
+            }
+            catch
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public Task<List<CityResponse>> Delete(int id)

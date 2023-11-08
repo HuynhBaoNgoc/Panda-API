@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace PandaDomain.Models.Request
 {
-    public class UpdateCityRequest
+    public class AddCityRequest
     {
-        public int CityId { get; set; }
         public string CityName { get; set; }
     }
 }
