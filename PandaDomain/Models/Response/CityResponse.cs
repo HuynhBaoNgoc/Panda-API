@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PandaDomain.Entities;
 
 namespace PandaDomain.Models.Response
 {
-    public class CityResponse
+    public class CityResponse : BaseDataModel
     {
         public int CityId { get; set; }
         public string CityName { get; set; }

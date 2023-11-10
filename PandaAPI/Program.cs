@@ -1,8 +1,7 @@
-using Microsoft.AspNetCore.Builder.Extensions;
-using Microsoft.EntityFrameworkCore;
 using PandaDomain.Mappings;
 using PandaInfrastructure;
 using PandaInfrastructure.ConnectionStrings;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,16 +18,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddMappingProfile();
 builder.Services.AddSwaggerGen();
 
-//var connectionString = builder.Configuration.GetConnectionString("Default");
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Error()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+
 builder.Services.AddDbContext<PandaDbContext>();
 
 var app = builder.Build();
-
-//using (var serviceScope = app.Services.CreateScope())
-//{
-//    var context = serviceScope.ServiceProvider.GetRequiredService<PandaDbContext>();
-//    context.Database.EnsureCreated();
-//}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

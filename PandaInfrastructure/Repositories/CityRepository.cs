@@ -1,22 +1,12 @@
 ﻿using AutoMapper;
-using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MySql.Data.MySqlClient;
 using PandaApplication.Interfaces.Repositories;
-using PandaApplication.Interfaces.Repositories.Generic;
 using PandaDomain.Entities;
 using PandaDomain.Models.Request;
 using PandaDomain.Models.Response;
 using PandaInfrastructure.ConnectionStrings;
-using PandaInfrastructure.Repositories.Generic;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
+using Serilog;
 
 namespace PandaInfrastructure.Repositories
 {
@@ -24,11 +14,13 @@ namespace PandaInfrastructure.Repositories
     {
         private readonly PandaDbContext _pandaDbContext;
         private readonly IMapper _mapper;
+        private readonly ILogger<CityRepository> _logger;
 
-        public CityRepository(PandaDbContext pandaDbContext, IMapper mapper)
+        public CityRepository(PandaDbContext pandaDbContext, IMapper mapper, ILogger<CityRepository> logger)
         {
             _pandaDbContext = pandaDbContext;
             _mapper = mapper;
+            _logger = logger;
         }
 
         //public async Task<List<CityResponse>> GetListCity()
@@ -50,9 +42,11 @@ namespace PandaInfrastructure.Repositories
                 var cities = await _pandaDbContext.Cities.ToListAsync();
                 var result = _mapper.Map<List<CityResponse>>(cities);
                 return result;
-            } catch
+            }
+            catch (Exception ex)
             {
-                throw new NotImplementedException();
+                Log.Error($"[CityRepo] - [GetListCity] {ex.Message}");
+                throw new Exception(ex.Message);
             }
         }
 
@@ -62,13 +56,17 @@ namespace PandaInfrastructure.Repositories
             {
                 var city = await _pandaDbContext.Cities.FindAsync(id);
                 if (city == null)
-                    throw new NotImplementedException();
+                {
+                    Log.Information("Id not found");
+                    return new CityResponse();
+                }
                 var result = _mapper.Map<CityResponse>(city);
                 return result;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new NotImplementedException();
+                Log.Error($"[CityRepo] - [GetCityById] {ex.Message}");
+                throw new Exception(ex.Message);
             }
         }
 
@@ -76,42 +74,65 @@ namespace PandaInfrastructure.Repositories
         {
             try
             {
-                var city = _mapper.Map<City>(cityRequest);
-                _pandaDbContext.Cities.Add(city);
+                _pandaDbContext.Cities.Add(new City()
+                {
+                    CityName = cityRequest.CityName
+                });
                 await _pandaDbContext.SaveChangesAsync();
                 var cities = await _pandaDbContext.Cities.ToListAsync();
                 var result = _mapper.Map<List<CityResponse>>(cities);
                 return result;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new NotImplementedException();
+                Log.Error($"[CityRepo] - [AddCity] {ex.Message}");
+                throw new Exception(ex.Message);
             }
         }
 
-        public async Task<List<CityResponse>> UpdateCity(UpdateCityRequest cityRequest)
+        public async Task<CityResponse> UpdateCity(UpdateCityRequest cityRequest)
         {
             try
             {
-                var city = await _pandaDbContext.Cities.FindAsync(cityRequest.CityId);
-                if (city == null)
-                    throw new NotImplementedException();
+                //var city = await _pandaDbContext.Cities.FindAsync(cityRequest.CityId);
+                //if (city == null)
+                //    throw new NotImplementedException();
                 var newInfo = _mapper.Map<City>(cityRequest);
-                city = newInfo;
+                _pandaDbContext.Set<City>().Update(newInfo);
+                await _pandaDbContext.SaveChangesAsync();
+                var city = await _pandaDbContext.Cities.FindAsync(cityRequest.CityId);
+                var result = _mapper.Map<CityResponse>(city);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"[CityRepo] - [UpdateCity] {ex.Message}");
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<List<CityResponse>> Delete(int id)
+        {
+            try
+            {
+                var city = await _pandaDbContext.Cities.FindAsync(id);
+                if (city == null)
+                {
+                    Log.Information("Id not found");
+                    return new List<CityResponse>();
+                }
+              
+                _pandaDbContext.Set<City>().Remove(city);
                 await _pandaDbContext.SaveChangesAsync();
                 var cities = await _pandaDbContext.Cities.ToListAsync();
                 var result = _mapper.Map<List<CityResponse>>(cities);
                 return result;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new NotImplementedException();
+                Log.Error($"[CityRepo] - [Delete] {ex.Message}");
+                throw new Exception(ex.Message);
             }
-        }
-
-        public Task<List<CityResponse>> Delete(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PandaDomain.Entities
 {
     [Table(nameof(Panda))]
-    public class Panda
+    public class Panda : BaseDataModel
     {
         [Key]
         public int PandaId { get; set; }

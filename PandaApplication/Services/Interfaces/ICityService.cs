@@ -1,9 +1,5 @@
-﻿using PandaDomain.Models.Response;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PandaDomain.Models.Request;
+using PandaDomain.Models.Response;
 
 namespace PandaApplication.Services.Interfaces
 {
@@ -11,5 +7,8 @@ namespace PandaApplication.Services.Interfaces
     {
         Task<List<CityResponse>> GetListCity();
         Task<CityResponse> GetCityById(int id);
+        Task<List<CityResponse>> AddCity(AddCityRequest cityRequest);
+        Task<CityResponse> UpdateCity(UpdateCityRequest cityRequest);
+        Task<List<CityResponse>> Delete(int id);
     }
 }

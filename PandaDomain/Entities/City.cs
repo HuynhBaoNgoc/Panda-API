@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PandaDomain.Entities
 {
     [Table(nameof(City))]
-    public class City
+    public class City : BaseDataModel
     {
         [Key]
         public int CityId { get; set; }

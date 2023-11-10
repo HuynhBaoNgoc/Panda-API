@@ -1,0 +1,20 @@
+2023-11-10 15:41:53.512 +07:00 [ERR] [CityRepo] - [GetListCity] Error mapping types.
+
+Mapping types:
+List`1 -> List`1
+System.Collections.Generic.List`1[[PandaDomain.Entities.City, PandaDomain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.List`1[[PandaDomain.Models.Response.CityResponse, PandaDomain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2023-11-10 15:41:53.577 +07:00 [ERR] [CityRepo] - [GetListCity] Error mapping types.
+
+Mapping types:
+List`1 -> List`1
+System.Collections.Generic.List`1[[PandaDomain.Entities.City, PandaDomain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.List`1[[PandaDomain.Models.Response.CityResponse, PandaDomain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2023-11-10 15:43:48.587 +07:00 [ERR] [CityRepo] - [GetCityById] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+City -> CityResponse
+PandaDomain.Entities.City -> PandaDomain.Models.Response.CityResponse
+2023-11-10 15:43:48.618 +07:00 [ERR] [CityRepo] - [GetCityById] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+City -> CityResponse
+PandaDomain.Entities.City -> PandaDomain.Models.Response.CityResponse

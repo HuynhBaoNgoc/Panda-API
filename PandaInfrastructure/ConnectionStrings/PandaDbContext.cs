@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using PandaDomain.Entities;
 
 namespace PandaInfrastructure.ConnectionStrings
@@ -32,7 +31,7 @@ namespace PandaInfrastructure.ConnectionStrings
             {
                 //var connectionString = Configuration.GetConnectionString("Default");
                 optionsBuilder.UseMySQL("server=localhost;user=root;password=root;database=pandadb;port=3306;",
-                    options => options.MigrationsAssembly("pandainfrastructure"));
+                    options => options.MigrationsAssembly("PandaInfrastructure"));
                 //optionsBuilder.UseMySQL(connectionString,
                 //    options => options.MigrationsAssembly("PandaInfrastructure"));
             }

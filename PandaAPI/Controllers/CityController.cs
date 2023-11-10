@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using PandaApplication.Services.Interfaces;
 using PandaDomain.Entities;
+using PandaDomain.Models.Request;
 using PandaDomain.Models.Response;
 
 namespace PandaAPI.Controllers
@@ -18,10 +17,9 @@ namespace PandaAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetListCity()
+        public async Task<ActionResult<List<CityResponse>>> GetListCity()
         {
             var result = await _citySerVice.GetListCity();
-
             return Ok(result);
         }
 
@@ -29,7 +27,28 @@ namespace PandaAPI.Controllers
         public async Task<ActionResult<List<City>>> GetCityById(int id)
         {
             var result = await _citySerVice.GetCityById(id);
-            return Ok(result);
+            return result != null ? Ok(result) : NotFound();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<List<CityResponse>>> AddCity(AddCityRequest cityRequest)
+        {
+            var result = await _citySerVice.AddCity(cityRequest);
+            return result != null ? Ok(result) : BadRequest();
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<CityResponse>> UpdateCity(UpdateCityRequest cityRequest)
+        {
+            var result = await _citySerVice.UpdateCity(cityRequest); //empty
+            return result != null ? Ok(result) : NotFound();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<List<CityResponse>>> Delete(int id)
+        {
+            var result = await _citySerVice.Delete(id);
+            return result != null ? Ok(result) : NotFound();
         }
     }
 }
