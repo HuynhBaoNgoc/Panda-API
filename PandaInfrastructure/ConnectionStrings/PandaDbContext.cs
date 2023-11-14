@@ -14,8 +14,10 @@ namespace PandaInfrastructure.ConnectionStrings
         }
         public DbSet<City> Cities { get; set; }
         public DbSet<Panda> Pandas { get; set; }
+        public DbSet<Food> Foods { get; set; }
+        public DbSet<PandaFavoriteFood> PandaFavoriteFoods { get; set; }
 
-        
+
 
         //protected readonly IConfiguration Configuration;
 
@@ -40,6 +42,16 @@ namespace PandaInfrastructure.ConnectionStrings
         public string GetConnectionString()
         {
             return _connectionStringService.Create();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<PandaFavoriteFood>(e =>
+            {
+                e.HasKey(k => new { k.PandaId, k.FoodId });
+            });
         }
     }
 }

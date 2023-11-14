@@ -43,6 +43,30 @@ namespace PandaInfrastructure.Migrations
                     b.ToTable("City");
                 });
 
+            modelBuilder.Entity("PandaDomain.Entities.Food", b =>
+                {
+                    b.Property<int>("FoodId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("FoodName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("FoodId");
+
+                    b.ToTable("Foods");
+                });
+
             modelBuilder.Entity("PandaDomain.Entities.Panda", b =>
                 {
                     b.Property<int>("PandaId")
@@ -72,6 +96,30 @@ namespace PandaInfrastructure.Migrations
                     b.ToTable("Panda");
                 });
 
+            modelBuilder.Entity("PandaDomain.Entities.PandaFavoriteFood", b =>
+                {
+                    b.Property<int>("PandaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FoodId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("PandaId", "FoodId");
+
+                    b.HasIndex("FoodId");
+
+                    b.ToTable("PandaFavoriteFoods");
+                });
+
             modelBuilder.Entity("PandaDomain.Entities.Panda", b =>
                 {
                     b.HasOne("PandaDomain.Entities.City", "City")
@@ -81,6 +129,25 @@ namespace PandaInfrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("City");
+                });
+
+            modelBuilder.Entity("PandaDomain.Entities.PandaFavoriteFood", b =>
+                {
+                    b.HasOne("PandaDomain.Entities.Food", "Food")
+                        .WithMany()
+                        .HasForeignKey("FoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PandaDomain.Entities.Panda", "Panda")
+                        .WithMany()
+                        .HasForeignKey("PandaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Food");
+
+                    b.Navigation("Panda");
                 });
 
             modelBuilder.Entity("PandaDomain.Entities.City", b =>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PandaApplication.HttpHandlers;
 using PandaApplication.Interfaces.Repositories;
 using PandaApplication.Interfaces.Repositories.Generic;
 using PandaApplication.Services;
@@ -17,6 +18,7 @@ namespace PandaInfrastructure
             AddDatabase(services, configuration);
             AddServices(services);
             AddRepositories(services);
+            //AddHandlers(services, baseAddress);
 
             return services;
         }
@@ -35,7 +37,16 @@ namespace PandaInfrastructure
 
         private static void AddServices(IServiceCollection services)
         {
+            services.AddScoped<CustomHeaderService>();
             services.AddTransient<ICityService, CityService>();
         }
+
+        //private static void AddHandlers(IServiceCollection services, Uri baseAddress)
+        //{
+        //    services.AddScoped(sp => new HttpClient(new CustomHeaderHandler())
+        //    {
+        //        BaseAddress = baseAddress
+        //    });
+        //}
     }
 }

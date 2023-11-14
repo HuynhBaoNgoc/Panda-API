@@ -13,6 +13,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "7.0.13",
           "MySql.Data.EntityFrameworkCore": "8.0.22",
           "MySql.EntityFrameworkCore": "7.0.0",
+          "PandaApplication": "1.0.0",
           "PandaInfrastructure": "1.0.0",
           "Swashbuckle.AspNetCore": "6.5.0"
         },

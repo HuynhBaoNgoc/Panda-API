@@ -1,3 +1,4 @@
+using PandaApplication.Middlewares;
 using PandaDomain.Mappings;
 using PandaInfrastructure;
 using PandaInfrastructure.ConnectionStrings;
@@ -11,6 +12,7 @@ builder.Services.AddControllers();
 builder.Host.ConfigureServices((context, services) =>
 {
     var configuration = context.Configuration;
+    //var baseAddress = context.HostingEnvironment.BaseAddress;
     services.AddInfrastructure(configuration);
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -37,6 +39,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<CustomHeaderMiddleware>();
 
 app.MapControllers();
 

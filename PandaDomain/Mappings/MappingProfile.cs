@@ -8,9 +8,9 @@ namespace PandaDomain.Mappings
     public class MappingProfile: Profile
     {
         public MappingProfile() {
-            //CreateMap<City, CityResponse>();
-            //CreateMap<AddCityRequest, City>();
-            //CreateMap<UpdateCityRequest, City>();
+            CreateMap<City, CityResponse>();
+            CreateMap<AddCityRequest, City>();
+            CreateMap<UpdateCityRequest, City>();
         }
     }
 }

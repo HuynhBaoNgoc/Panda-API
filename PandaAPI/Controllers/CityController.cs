@@ -3,6 +3,8 @@ using PandaApplication.Services.Interfaces;
 using PandaDomain.Entities;
 using PandaDomain.Models.Request;
 using PandaDomain.Models.Response;
+using PandaApplication.HttpHandlers;
+using PandaApplication.Middlewares;
 
 namespace PandaAPI.Controllers
 {

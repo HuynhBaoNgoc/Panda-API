@@ -3855,6 +3855,7 @@
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.13",
       "MySql.Data.EntityFrameworkCore >= 8.0.22",
       "MySql.EntityFrameworkCore >= 7.0.0",
+      "PandaApplication >= 1.0.0",
       "PandaInfrastructure >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
@@ -3891,6 +3892,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "C:\\Users\\hbaongoc\\Documents\\Practice2\\Panda-API\\PandaApplication\\PandaApplication.csproj": {
+              "projectPath": "C:\\Users\\hbaongoc\\Documents\\Practice2\\Panda-API\\PandaApplication\\PandaApplication.csproj"
+            },
             "C:\\Users\\hbaongoc\\Documents\\Practice2\\Panda-API\\PandaInfrastructure\\PandaInfrastructure.csproj": {
               "projectPath": "C:\\Users\\hbaongoc\\Documents\\Practice2\\Panda-API\\PandaInfrastructure\\PandaInfrastructure.csproj"
             }

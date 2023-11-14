@@ -74,10 +74,12 @@ namespace PandaInfrastructure.Repositories
         {
             try
             {
-                _pandaDbContext.Cities.Add(new City()
-                {
-                    CityName = cityRequest.CityName
-                });
+                var city = _mapper.Map<City>(cityRequest);
+                _pandaDbContext.Add(city);
+                //_pandaDbContext.Cities.Add(new City()
+                //{
+                //    CityName = cityRequest.CityName
+                //});
                 await _pandaDbContext.SaveChangesAsync();
                 var cities = await _pandaDbContext.Cities.ToListAsync();
                 var result = _mapper.Map<List<CityResponse>>(cities);
