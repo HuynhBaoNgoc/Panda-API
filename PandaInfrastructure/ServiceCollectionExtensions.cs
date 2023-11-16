@@ -33,12 +33,15 @@ namespace PandaInfrastructure
         {
             services.AddScoped(typeof(IGeneralRepository<>), typeof(GeneralRepository<>));
             services.AddTransient<ICityRepository, CityRepository>();
+            services.AddTransient<IPandaRepository, PandaRepository>();
+            services.AddTransient<IFoodRepository, FoodRepository>();
         }
 
         private static void AddServices(IServiceCollection services)
         {
             services.AddScoped<CustomHeaderService>();
             services.AddTransient<ICityService, CityService>();
+            services.AddTransient<IPandaService, PandaService>();
         }
 
         //private static void AddHandlers(IServiceCollection services, Uri baseAddress)

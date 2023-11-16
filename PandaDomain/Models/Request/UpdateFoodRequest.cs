@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PandaDomain.Entities
+namespace PandaDomain.Models.Request
 {
-    public class Food : BaseDataModel
+    public class UpdateFoodRequest
     {
-        [Key]
         public int FoodId { get; set; }
         public string FoodName { get; set; }
-        public decimal UnitPrice { get; set; }
+        public DateTime UpdatedDate { get; set; } = DateTime.Now;
     }
 }

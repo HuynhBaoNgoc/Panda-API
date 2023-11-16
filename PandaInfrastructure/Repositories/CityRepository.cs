@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using MySql.Data.MySqlClient;
 using PandaApplication.Interfaces.Repositories;
 using PandaDomain.Entities;
 using PandaDomain.Models.Request;
 using PandaDomain.Models.Response;
 using PandaInfrastructure.ConnectionStrings;
 using Serilog;
+using System.Data;
 
 namespace PandaInfrastructure.Repositories
 {
@@ -23,32 +26,32 @@ namespace PandaInfrastructure.Repositories
             _logger = logger;
         }
 
-        //public async Task<List<CityResponse>> GetListCity()
-        //{ 
-        //    using (var connection = new MySqlConnection() { ConnectionString = _pandaDbContext.GetConnectionString() })
-        //    {
-        //        var sql = $@"SELECT * FROM pandadb.city;";
-
-        //        var queryParameters = new DynamicParameters();
-        //        var response = (await connection.QueryAsync<CityResponse>(sql, queryParameters, commandType: CommandType.Text)).ToList();
-        //        return response;
-        //    };
-        //}
-
         public async Task<List<CityResponse>> GetListCity()
         {
-            try
+            using (var connection = new MySqlConnection() { ConnectionString = _pandaDbContext.GetConnectionString() })
             {
-                var cities = await _pandaDbContext.Cities.ToListAsync();
-                var result = _mapper.Map<List<CityResponse>>(cities);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"[CityRepo] - [GetListCity] {ex.Message}");
-                throw new Exception(ex.Message);
-            }
+                var sql = $@"SELECT * FROM pandadb.city;";
+
+                var queryParameters = new DynamicParameters();
+                var response = (await connection.QueryAsync<CityResponse>(sql, queryParameters, commandType: CommandType.Text)).ToList();
+                return response;
+            };
         }
+
+        //public async Task<List<CityResponse>> GetListCity()
+        //{
+        //    try
+        //    {
+        //        var cities = await _pandaDbContext.Cities.ToListAsync();
+        //        var result = _mapper.Map<List<CityResponse>>(cities);
+        //        return result;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.Error($"[CityRepo] - [GetListCity] {ex.Message}");
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
 
         public async Task<CityResponse> GetCityById(int id)
         {

@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Builder.Extensions;
 using PandaApplication.Middlewares;
 using PandaDomain.Mappings;
+using PandaDomain.Models.Options;
 using PandaInfrastructure;
 using PandaInfrastructure.ConnectionStrings;
 using Serilog;
@@ -26,6 +28,11 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 builder.Services.AddDbContext<PandaDbContext>();
+builder.Host.ConfigureServices((context, services) =>
+{
+    var configuration = context.Configuration;
+    services.Configure<DatabaseOptions>(configuration.GetSection(DatabaseOptions.JsonKey));
+});
 
 var app = builder.Build();
 
