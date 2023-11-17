@@ -16,7 +16,7 @@ namespace PandaInfrastructure.ConnectionStrings
         public DbSet<Panda> Pandas { get; set; }
         public DbSet<Food> Foods { get; set; }
         public DbSet<PandaFavoriteFood> PandaFavoriteFoods { get; set; }
-
+        public DbSet<User> User { get; set; }
 
 
         //protected readonly IConfiguration Configuration;
@@ -53,6 +53,10 @@ namespace PandaInfrastructure.ConnectionStrings
             {
                 e.HasKey(k => new { k.PandaId, k.FoodId });
             });
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.UserName)
+                .IsUnique();
         }
     }
 }

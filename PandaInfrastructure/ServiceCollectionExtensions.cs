@@ -44,6 +44,7 @@ namespace PandaInfrastructure
             services.AddScoped<CustomHeaderService>();
             services.AddTransient<ICityService, CityService>();
             services.AddTransient<IPandaService, PandaService>();
+            services.AddTransient<IAuthService, AuthService>();
         }
 
         //private static void AddHandlers(IServiceCollection services, Uri baseAddress)

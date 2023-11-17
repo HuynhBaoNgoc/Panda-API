@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PandaInfrastructure.ConnectionStrings;
 
@@ -10,9 +11,11 @@ using PandaInfrastructure.ConnectionStrings;
 namespace PandaInfrastructure.Migrations
 {
     [DbContext(typeof(PandaDbContext))]
-    partial class PandaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231117110607_AddUserTable")]
+    partial class AddUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,32 +124,6 @@ namespace PandaInfrastructure.Migrations
                     b.HasIndex("FoodId");
 
                     b.ToTable("PandaFavoriteFoods");
-                });
-
-            modelBuilder.Entity("PandaDomain.Entities.User", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<byte[]>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("longblob");
-
-                    b.Property<byte[]>("PasswordSalt")
-                        .IsRequired()
-                        .HasColumnType("longblob");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("UserId");
-
-                    b.HasIndex("UserName")
-                        .IsUnique();
-
-                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("PandaDomain.Entities.Panda", b =>
