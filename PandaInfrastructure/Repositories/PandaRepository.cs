@@ -62,7 +62,7 @@ namespace PandaInfrastructure.Repositories
                 throw new Exception(ex.Message);
             }
         }
-
+        
         #region Others
         //public async Task<PandaResponse> GetPandaById(int id)
         //{

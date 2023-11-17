@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PandaApplication.HttpHandlers;
 using PandaApplication.Interfaces.Repositories;
@@ -39,6 +40,7 @@ namespace PandaInfrastructure
 
         private static void AddServices(IServiceCollection services)
         {
+            services.AddSingleton<IMemoryCache, MemoryCache>();
             services.AddScoped<CustomHeaderService>();
             services.AddTransient<ICityService, CityService>();
             services.AddTransient<IPandaService, PandaService>();
