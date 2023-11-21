@@ -12,5 +12,6 @@ namespace PandaApplication.Services.Interfaces
     public interface IAuthService
     {
         Task<User> Register(UserDto request);
+        Task<string> Login(UserDto request);
     }
 }

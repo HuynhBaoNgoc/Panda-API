@@ -1,9 +1,11 @@
-﻿using PandaApplication.Services.Interfaces;
+﻿using Microsoft.IdentityModel.Tokens;
+using PandaApplication.Services.Interfaces;
 using PandaDomain.Entities;
 using PandaDomain.Models.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using BC = BCrypt.Net.BCrypt;
@@ -12,23 +14,36 @@ namespace PandaApplication.Services
 {
     public class AuthService : IAuthService
     {
-        public static User user = new User();
         public async Task<User> Register(UserDto request)
         {
+            User user = new User();
             user.UserName = request.UserName;
-            user.PasswordHash = await HashPasswordAsync("password");
-            user.PasswordSalt = Encoding.UTF8.GetBytes(BC.GenerateSalt());
+            user.PasswordHash = BC.HashPassword(request.Password);
+            user.PasswordSalt = BC.GenerateSalt();
             return user; 
         }
 
-        private Task<byte[]> HashPasswordAsync(string password)
+        public async Task<string> Login(UserDto request)
         {
-            return Task.Run(() =>
+            User user = new User();
+            user.UserName = request.UserName;
+            user.PasswordHash = BC.HashPassword(request.Password);
+            user.PasswordSalt = BC.GenerateSalt();
+            if (user.UserName != request.UserName)
             {
-                // Hash the password and convert it to a byte array
-                string hashedPassword = BC.HashPassword(password);
-                return Encoding.UTF8.GetBytes(hashedPassword);
-            });
-        }    
+                return "User not found";
+            }
+            return BC.Verify(request.Password, user.PasswordHash) ? "token" : "Password wrong";
+        }
+
+        private string CreateToken(User user)
+        {
+            List<Claim> claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.UserName)
+            };
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(user.UserName));
+            return "";
+        }
     }
 }

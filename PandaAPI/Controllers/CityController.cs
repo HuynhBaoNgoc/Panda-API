@@ -19,6 +19,7 @@ namespace PandaAPI.Controllers
         }
 
         [HttpGet]
+        //[ProducesResponseType(200, Type = typeof(List<CityResponse>))]
         public async Task<ActionResult<List<CityResponse>>> GetListCity()
         {
             var result = await _citySerVice.GetListCity();
